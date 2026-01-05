@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robert's Performance</title>
+    <style>
+        :root {
+            --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            
+            --bg-page: #F8F9FA; /* Very light gray, almost white */
+            --bg-content: #FFFFFF; /* Pure white for cards, sections */
+            
+            --text-main: #212529; /* Dark gray for high contrast text */
+            --text-muted: #6C757D; /* Medium gray for secondary text */
+            --text-on-accent: #FFFFFF;
+
+            --border-subtle: #E9ECEF; /* Light border for cards, dividers */
+            --border-strong: #CED4DA; /* Slightly stronger for inputs */
+
+            --accent-blue: #007BFF; /* Professional blue */
+            --accent-blue-dark: #0056b3;
+            --accent-blue-light-bg: #E6F2FF;
+            
+            --accent-green: #28A745; /* Success green */
+            --accent-green-dark-text: #155724;
+            --accent-green-light-bg: #D4EDDA;
+            
+            --accent-orange: #FD7E14; /* Warning/Informative orange */
+            --accent-orange-dark-text: #854A0E;
+            --accent-orange-light-bg: #FFF3CD;
+
+            --accent-cyan: #17A2B8; /* Info cyan */
+            --accent-cyan-dark-text: #0C5460;
+            --accent-cyan-light-bg: #D1ECF1;
+
+            --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.07);
+            
+            /* Map to old variables for easier integration with existing HTML structure */
+            --primary-color: var(--accent-blue);
+            --primary-dark: var(--accent-blue-dark);
+            --secondary-color: var(--accent-cyan);
+            --accent-color: var(--accent-orange);
+            --bg-color: var(--bg-page);
+            --card-bg: var(--bg-content);
+            --text-color: var(--text-main);
+            --text-light: var(--text-muted);
+            --border-color: var(--border-subtle);
+            --success-color: var(--accent-green);
+            --warning-color: var(--accent-orange);
+            --info-color: var(--accent-cyan);
+            --shadow-md: var(--shadow-soft);
+            --shadow-lg: var(--shadow-medium);
+            --shadow-xl: var(--shadow-medium); /* Consolidate shadow strength */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.65;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: 16px; /* Base font size */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-content);
+            color: var(--text-main);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        h2 {
+            display: flex; 
+            justify-content: center;
+             align-items: center; 
+        }
+
+        header h1 {
+            font-size: 2rem; /* Slightly smaller, more modern */
+            font-weight: 600; /* Less heavy */
+            margin-bottom: 0.35rem;
+        }
+        header h1 .icon {
+            font-size: 1.8rem;
+            margin-right: 0.6rem;
+            vertical-align: -0.15em; /* Better alignment */
+            color: var(--accent-blue); 
+        }
+        header p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--bg-content);
+            padding: 0.25rem 0; /* Slimmer nav */
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky; /* Default to sticky for desktop */
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-soft);
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.6rem 1rem; /* Adjusted padding */
+            display: block;
+            transition: color 0.2s ease, border-bottom-color 0.2s ease;
+            font-weight: 500;
+            font-size: 0.875rem; /* 14px */
+            text-transform: capitalize; /* Softer than uppercase */
+            letter-spacing: 0.2px;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+        nav ul li a.active {
+            color: var(--accent-blue);
+            font-weight: 600;
+            border-bottom-color: var(--accent-blue);
+        }
+        
+        /* Main Content Area */
+        .container {
+            width: 90%;
+            max-width: 1000px; /* Slightly narrower for better readability */
+            margin: 2rem auto;
+            padding: 0 1rem; /* Padding on sides, not top/bottom */
+            flex-grow: 1;
+        }
+
+        section {
+            background-color: var(--bg-content);
+            margin-bottom: 2.5rem;
+            padding: 1.75rem 2rem; /* Adjusted padding */
+            border-radius: 8px; 
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-subtle);
+            scroll-margin-top: 70px; /* Default for sticky nav */
+        }
+
+        section h2 {
+            color: var(--text-main);
+            font-size: 1.75rem; 
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+        }
+        section h2 .icon {
+            margin-right: 0.75rem;
+            font-size: 1.6rem;
+            color: var(--accent-cyan);
+        }
+
+        section h3 {
+            color: var(--text-main);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 1.75rem;
+            margin-bottom: 0.85rem;
+        }
+         section h4 {
+            color: var(--text-main);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.6rem;
+            border-left: 3px solid var(--accent-orange);
+            padding-left: 0.6rem;
+        }
+
+        p {
+            margin-bottom: 1.1rem;
+            color: var(--text-muted);
+            font-size: 0.9375rem; /* 15px */
+        }
+
+        ul, ol {
+            margin-bottom: 1.1rem;
+            padding-left: 1.5rem; /* Reduced indent */
+        }
+        ul li, ol li {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+        }
+        ul li strong, ol li strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Interactive Elements: Accordion */
+        .accordion-item {
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+            background-color: var(--bg-content);
+        }
+
+        .accordion-header {
+            background-color: #F8F9FA; /* Slightly off-white header */
+            color: var(--text-main);
+            padding: 0.85rem 1.25rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500; /* Less bold */
+            font-size: 1rem;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-header:hover {
+            background-color: #F1F3F5; /* Slightly darker on hover */
+        }
+        .accordion-header .icon {
+            transition: transform 0.3s ease;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        .accordion-header.active .icon {
+            transform: rotate(180deg);
+        }
+        .accordion-header.active {
+            background-color: #E9ECEF; /* Active header slightly darker */
+        }
+
+        .accordion-content {
+            padding: 0 1.25rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out, padding 0.35s ease-out;
+            background-color: var(--bg-content); /* Ensure content bg is white */
+        }
+        .accordion-content p, .accordion-content ul, .accordion-content ol {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .accordion-content.active {
+            /* padding is set in JS to allow for dynamic height calculation */
+        }
+
+        /* Cards for Styles */
+        .style-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .style-card {
+            background-color: var(--bg-content);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .style-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        .style-card h4 {
+            color: var(--text-main);
+            font-size: 1.1rem; /* Smaller card titles */
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            border-left: none; 
+            padding-left: 0;
+            font-weight: 600;
+        }
+        .style-card h4 .icon {
+            margin-right: 0.5rem;
+            font-size: 1.2em;
+            color: var(--accent-cyan);
+        }
+        .style-card .details {
+            font-size: 0.875rem; /* 14px */
+            flex-grow: 1; 
+        }
+        .style-card .details strong {
+            color: var(--text-main);
+        }
+        .style-card .example-sound {
+            font-style: normal; /* Less italicized */
+            color: var(--accent-orange-dark-text);
+            margin-top: 1rem;
+            padding: 0.6rem 0.85rem;
+            background-color: var(--accent-orange-light-bg); 
+            border-left: 3px solid var(--accent-orange);
+            border-radius: 4px;
+            font-size: 0.8125rem; /* 13px */
+        }
+
+        /* Table for Cheatsheet */
+        .cheatsheet-table-container {
+            overflow-x: auto; 
+            margin-top: 1.25rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            box-shadow: var(--shadow-soft);
+        }
+        .cheatsheet-table {
+            width: 100%;
+            min-width: 650px; 
+            border-collapse: collapse;
+        }
+        .cheatsheet-table th, .cheatsheet-table td {
+            border-bottom: 1px solid var(--border-subtle); /* Only bottom borders for rows */
+            border-right: 1px solid var(--border-subtle); /* Right border for columns */
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+        .cheatsheet-table th:last-child, .cheatsheet-table td:last-child {
+            border-right: none; /* No right border for last column */
+        }
+         .cheatsheet-table tbody tr:last-child td {
+            border-bottom: none; /* No bottom border for last row */
+        }
+        .cheatsheet-table th {
+            background: #F8F9FA; /* Light gray header */
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        .cheatsheet-table tbody tr:nth-child(even) {
+            background-color: #FCFCFC; /* Very subtle striping */
+        }
+        .cheatsheet-table tbody tr:hover {
+            background-color: #F1F3F5; 
+        }
+
+        /* Quiz Styles */
+        .quiz-container { 
+            background-color: var(--bg-page); /* Match page background */
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 1.25rem;
+            border: 1px solid var(--border-subtle);
+        }
+        .quiz-question {
+            margin-bottom: 1.25rem;
+            padding: 1.25rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            background-color: var(--bg-content);
+        }
+        .quiz-question p {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.85rem;
+            color: var(--text-main);
+        }
+        .quiz-options label {
+            display: block;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            padding: 0.6rem 0.85rem;
+            border-radius: 4px;
+            transition: background-color 0.2s, border-color 0.2s;
+            border: 1px solid var(--border-strong);
+            font-size: 0.9rem;
+        }
+        .quiz-options label:hover {
+            background-color: var(--accent-blue-light-bg);
+            border-color: var(--accent-blue);
+        }
+        .quiz-options input[type="radio"] {
+            margin-right: 0.6rem;
+            transform: scale(1.05);
+            vertical-align: -0.1em;
+        }
+        .quiz-feedback {
+            margin-top: 0.6rem;
+            font-weight: 500; /* Normal weight */
+            font-size: 0.875rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+        }
+        .quiz-feedback.correct {
+            color: var(--accent-green-dark-text);
+            background-color: var(--accent-green-light-bg);
+            border: 1px solid var(--accent-green);
+        }
+        .quiz-feedback.incorrect {
+            color: var(--accent-orange-dark-text);
+            background-color: var(--accent-orange-light-bg);
+            border: 1px solid var(--accent-orange);
+        }
+        #submit-quiz {
+            background-color: var(--accent-blue);
+            color: var(--text-on-accent);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9375rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            margin-top: 1.25rem;
+            font-weight: 500;
+        }
+        #submit-quiz:hover {
+            background-color: var(--accent-blue-dark);
+            transform: translateY(-1px);
+        }
+        #quiz-score {
+            margin-top: 1.25rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0;
+            border-left-width: 4px;
+            border-left-style: solid;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .callout h4 {
+            font-size: 1rem;
+            margin-top: 0;
+            margin-bottom: 0.4rem;
+            border-left: none;
+            padding-left: 0;
+        }
+        .callout-info {
+            border-left-color: var(--accent-cyan);
+            background-color: var(--accent-cyan-light-bg);
+        }
+        .callout-info h4 { color: var(--accent-cyan-dark-text); }
+
+        .callout-warning {
+            border-left-color: var(--accent-orange);
+            background-color: var(--accent-orange-light-bg);
+        }
+         .callout-warning h4 { color: var(--accent-orange-dark-text); }
+
+        .callout-tip {
+            border-left-color: var(--accent-green);
+            background-color: var(--accent-green-light-bg);
+        }
+        .callout-tip h4 { color: var(--accent-green-dark-text); }
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background-color: #343A40; /* Dark footer */
+            color: #F8F9FA; /* Light text on dark footer */
+            margin-top: auto;
+        }
+        footer p {
+            color: #F8F9FA; 
+            font-size: 0.875rem;
+        }
+
+        /* Utility Classes */
+        .text-accent { color: var(--accent-orange) !important; }
+        .text-secondary { color: var(--accent-cyan) !important; }
+        .font-bold { font-weight: 600 !important; } /* Use 600 for bold */
+        .mt-1 { margin-top: 1rem !important; }
+        .mb-2 { margin-bottom: 2rem !important; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 900px) { 
+            header h1 { font-size: 1.75rem; }
+            nav ul li a { padding: 0.6rem 0.8rem; font-size: 0.8125rem; } /* 13px */
+            .container { width: 95%; }
+            section { padding: 1.5rem; }
+            section h2 { font-size: 1.5rem; }
+            section h3 { font-size: 1.25rem; }
+        }
+        
+        /* Tablet and smaller: Navigation becomes non-sticky */
+        @media (max-width: 768px) {
+            nav {
+                position: static; /* Remove sticky for mobile */
+                box-shadow: none; /* Remove shadow if not sticky */
+                border-top: 1px solid var(--border-subtle); /* Add top border if it looks better */
+            }
+            section {
+                scroll-margin-top: 1.5rem; /* Reset scroll margin if nav is not sticky */
+            }
+             nav ul {
+                flex-direction: row; /* Keep horizontal for common tablet sizes */
+                overflow-x: auto; /* Allow horizontal scroll if items overflow */
+                justify-content: flex-start; /* Align to left for scroll */
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            nav ul li a {
+                white-space: nowrap; /* Prevent wrapping of nav items */
+            }
+        }
+
+        @media (max-width: 600px) {
+            body { font-size: 15px; }
+            header h1 { font-size: 1.5rem; }
+            section h2 { font-size: 1.35rem; }
+            section h3 { font-size: 1.15rem; }
+            .container { margin: 1.5rem auto; padding: 0 0.5rem; } /* Reduce side padding for container */
+            section { padding: 1.25rem 1rem; } /* Adjust section padding */
+            
+            nav ul {
+                 /* Horizontal scroll is generally fine, ensure it doesn't cause horizontal scroll on body */
+                 -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
+            }
+
+            .style-cards-container {
+                grid-template-columns: 1fr; 
+            }
+            .cheatsheet-table th, .cheatsheet-table td {
+                padding: 0.6rem;
+                font-size: 0.8125rem;
+            }
+            .quiz-options label { padding: 0.5rem 0.75rem; font-size: 0.85rem;}
+            #submit-quiz { padding: 0.6rem 1.2rem; font-size: 0.875rem;}
+
+        }
+         /* Custom Scrollbar - Subtle */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-page);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CED4DA; /* Muted gray */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ADB5BD; /* Slightly darker on hover */
+        }
+
+         }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+  .panger {
+    user-select: none;
+    cursor: pointer;
+    background: white;
+    margin: 8px 70px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 22px;
+    color: #707070;
+    border: 1px solid #eaeaea;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><span class="icon">🌴🧬</span>Robert Jones Science Performance Task<span class="icon">🐷🦅</span></h1>
+        <p>Grade 8, Zeal for Term 2</p>
+    </header>
+
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#welcome" class="active">Book</a></li>
+            <li><a href="#lexicon">Bot Helper</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+  <section id="welcome">
+    <h2>
+      <button id="prevBtn" class="panger">Previous Page</button>
+      <label> 
+        <select id="pageSelect" class="panger">
+          <option value="Page1.png">Page 1</option>
+          <option value="Page2.png">Page 2</option>
+          <option value="Page3.png">Page 3</option>
+          <option value="Page4.png">Page 4</option>
+          <option value="Page5.png">Page 5</option>
+          <option value="Page6.png">Page 6</option>
+          <option value="Page7.png">Page 7</option>
+          <option value="Page8.png">Page 8</option>
+          <option value="Page9.png">Page 9</option>
+          <option value="Page10.png">Page 10</option>
+          <option value="Page11.png">Page 11</option>
+          <option value="Page12.png">Page 12</option>
+          <option value="Page13.png">Page 13</option>
+          <option value="Page14.png">Page 14</option>
+          <option value="Page15.png">Page 15</option>
+          <option value="Page16.png">Page 16</option>
+        </select>
+      </label>
+      <button id="nextBtn" class="panger">Next Page</button>
+    </h2>
+
+    <img id="page" class="layer" src="page1.png">
+  </section>
+
+   <section id="lexicon">
+    <h2>PHILIP BOT</h2>
+  <div id="messages" style="
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+  ">
+    <div>Philip 🦅: Mabuhay! I am Philip.</div>
+  </div>
+
+  <div style="display: flex; gap: 8px;">
+    <input id="input" placeholder="Talk to Philip..." type="text" style="flex: 1;" />
+    <button id="sendBtn">Send</button>
+  </div>
+</section>
+
+  <section id="quiz">
+            <h2><span class="icon">❓</span>Test your understanding of Evolution!🧬🚀</h2>
+            <p>🌵🫶Choose the letter of the correct option!</p>
+            <div class="quiz-container">
+                <form id="voiceover-quiz">
+                    <div class="quiz-question">
+                        <p>1. According to the story how do you think species change over time??</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1" value="a"> a) Species change from environmental pressures only.</label>
+                            <label><input type="radio" name="q1" value="b"> b) Species change for different reasons it can be environmental pressures, migration, or random changes in dna.</label>
+                            <label><input type="radio" name="q1" value="c"> c) Species change for no reason and they can change during their lifetime whenever they wanna.</label>
+                            <label><input type="radio" name="q1" value="d"> d) Species dont ever evolve, the changes in a species are just made up by the government.</label>
+                        </div>
+                        <div class="quiz-feedback" id="q1-feedback"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p>2. Which among the options explain how variation makes new species over time?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2" value="a"> a) Variation does not effect speciation (Process species become different species) at all.</label>
+                            <label><input type="radio" name="q2" value="b"> b) Variation leads to changes in the same population, leading the population to stay the same and random effects from nature will just kill the rest.</label>
+                            <label><input type="radio" name="q2" value="c"> c) Variation leads to changes in different populations from the same species, and over time the species with the most beneficial traits will survive and pass on those advantageous traits to the next generation.</label>
+                            <label><input type="radio" name="q2" value="d"> d) None of the above.</label>
+                        </div>
+                        <div class="quiz-feedback" id="q2-feedback"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p>3. Why is it important to learn about these species in the Philippines and how they came to be?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3" value="a"> a) To get high marks on the exam.</label>
+                            <label><input type="radio" name="q3" value="b"> b) To become educated and appreciative.</label>
+                            <label><input type="radio" name="q3" value="c"> c) To support illegal and harmful environmental projects.</label>
+                            <label><input type="radio" name="q3" value="d"> d) To be able to be smart and share it to others only because it makes us seem smarter than the average person.</label>
+                        </div>
+                        <div class="quiz-feedback" id="q3-feedback"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p>4. Which of the following is true?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q4" value="a"> a) Populations arent groups of a population.</label>
+                            <label><input type="radio" name="q4" value="b"> b) Mutations cannot be a reason for evolution.</label>
+                            <label><input type="radio" name="q4" value="c"> c) Species evolve over time and throughout generations.</label>
+                            <label><input type="radio" name="q4" value="d"> d) Species stop evolving ever since 1990.</label>
+                        </div>
+                        <div class="quiz-feedback" id="q4-feedback"></div>
+                    </div>
+                    <div class="quiz-question">
+                        <p>5. What do you call people of different races?:</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q5" value="a"> a) Mutations.</label>
+                            <label><input type="radio" name="q5" value="b"> b) Completely different species.</label>
+                            <label><input type="radio" name="q5" value="c"> c) Populations.</label>
+                            <label><input type="radio" name="q5" value="d"> d) None mentioned.</label>
+                        </div>
+                        <div class="quiz-feedback" id="q5-feedback"></div>
+                    </div>
+                    <div class="quiz-question">
+                        <p>6. Which of the following evolutionary concepts best explains why some dog breeds have longer snouts and better smelling abilities?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q6" value="a"> a) Mutation.</label>
+                            <label><input type="radio" name="q6" value="b"> b) Natural Selection.</label>
+                            <label><input type="radio" name="q6" value="c"> c) Environmental pressures.</label>
+                            <label><input type="radio" name="q6" value="d"> d) Adaptation.</label>
+                        </div>
+                        <div class="quiz-feedback" id="q6-feedback"></div>
+                    </div>
+
+
+                    <button type="button" id="submit-quiz">Ready? Are you sure?(Submit)</button>
+                    <div id="quiz-score"></div>
+                </form>
+            </div>
+        </section>
+</div>
+
+
+<script>
+
+// =========================
+// BOT
+// =========================
+// =========================
+// MEMORY
+// =========================
+const memory = {};
+
+// =========================
+// PROFILE
+// =========================
+const profile = {
+  greeting: "Hello! I am Philip 🦅, ready to share knowledge.",
+  farewell: "Goodbye! May your mind soar high like an eagle."
+};
+
+// =========================
+// BASIC KNOWLEDGE BASE
+// =========================
+const knowledge = {
+  "variation in evolution":
+    "Variation in evolution refers to differences in traits among individuals in a population. These differences can be caused by genetic mutations, sexual reproduction, and environmental influences, and they are important because they allow natural selection to occur.",
+  "natural selection":
+    "Natural selection is the process where organisms with traits better suited to their environment are more likely to survive and reproduce.",
+  "evolution":
+    "Evolution is the change in characteristics of populations over many generations through processes like mutation, selection, and genetic drift.",
+   "mutation":
+   "Mutation is a change in an organism's DNA sequence, acting as the source of genetic variation crucial for evolution, resulting from errors in DNA replication or environmental factors like radiation and chemicals."
+};
+
+// =========================
+// UTILITY FUNCTIONS
+// =========================
+function getDate() {
+  return `Today is ${new Date().toDateString()}.`;
+}
+
+function calculate(expression) {
+  try {
+    if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
+      return "I sense danger in that calculation. Numbers only.";
+    }
+    const result = Function(`"use strict"; return (${expression})`)();
+    return `After careful thought, the answer is ${result}.`;
+  } catch {
+    return "That calculation could not be completed.";
+  }
+}
+
+function rememberFact(key, value) {
+  memory[key] = value;
+  return `I will remember that ${key} is ${value}.`;
+}
+
+function recallFact(key) {
+  return memory[key]
+    ? `From my memory: ${key} is ${memory[key]}.`
+    : "That knowledge has not yet reached my nest.";
+}
+
+// =========================
+// CORE AI LOGIC
+// =========================
+function philipAI(input) {
+  const text = input.toLowerCase().trim();
+
+  if (/hello|hi|hey|mabuhay/.test(text)) return profile.greeting;
+  if (text.includes("time")) return new Date().toLocaleTimeString();
+  if (text.includes("date")) return getDate();
+
+  if (text.startsWith("calculate")) {
+    return calculate(text.replace("calculate", "").trim());
+  }
+
+  if (text.startsWith("remember")) {
+    const parts = text.replace("remember", "").trim().split(" is ");
+    if (parts.length === 2) return rememberFact(parts[0].trim(), parts[1].trim());
+    return "Say it like: remember [thing] is [detail].";
+  }
+
+  if (text.startsWith("what is")) {
+    const topic = text.replace("what is", "").trim();
+    if (knowledge[topic]) return knowledge[topic];
+    return `I do not yet have wisdom about "${topic}", but I am eager to learn.`;
+  }
+
+  if (text.includes("who are you")) {
+    return "I am Philip 🦅, the guardian of knowledge.";
+  }
+
+  if (/bye|exit|goodbye/.test(text)) {
+    return profile.farewell;
+  }
+
+  return "I am listening, but I need clearer guidance.";
+}
+
+// =========================
+// SEND MESSAGE
+// =========================
+function sendMessage() {
+  const inputEl = document.getElementById("input");
+  const messages = document.getElementById("messages");
+  const userText = inputEl.value.trim();
+  if (!userText) return;
+
+  addMessage("You: " + userText);
+  inputEl.value = "";
+
+  const reply = philipAI(userText);
+  addMessage("Philip 🦅: " + reply);
+}
+
+// =========================
+// ADD MESSAGE TO CHAT
+// =========================
+function addMessage(msg) {
+  const messages = document.getElementById("messages");
+  const p = document.createElement("p");
+  p.textContent = msg;
+  messages.appendChild(p);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// =========================
+// EVENTS
+// =========================
+const inputEl = document.getElementById("input");
+inputEl.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") sendMessage();
+});
+document.getElementById("sendBtn").addEventListener("click", sendMessage);
+
+// =========================
+// START MESSAGE
+// =========================
+addMessage("Philip 🦅: " + profile.greeting);
+
+
+
+///quiz
+     const quizForm = document.getElementById('voiceover-quiz');
+        const submitButton = document.getElementById('submit-quiz');
+        const quizScoreDisplay = document.getElementById('quiz-score');
+///answer key
+        const answers = {
+            q1: 'b',
+            q2: 'c',
+            q3: 'b',
+            q4: 'c',
+            q5: 'c',
+            q6: 'b'
+        };
+
+        if (submitButton && quizForm) { 
+            submitButton.addEventListener('click', () => {
+                let score = 0;
+                const totalQuestions = Object.keys(answers).length;
+                let allAnswered = true;
+
+                for (const question in answers) {
+                    const feedbackEl = document.getElementById(`${question}-feedback`);
+                    if (!feedbackEl) continue; 
+
+                    const radioGroup = quizForm.elements[question];
+                    let selectedOption = null;
+                    if (radioGroup) { 
+                         selectedOption = radioGroup.value; 
+                    }
+                    
+                    if (selectedOption) {
+                        if (selectedOption === answers[question]) {
+                            score++;
+                            feedbackEl.textContent = "Correct! Your wisdom shines! ✨";
+                            feedbackEl.className = 'quiz-feedback correct';
+                        } else {
+                            feedbackEl.textContent = `Not quite. The alchemical formula pointed to: '${answers[question].toUpperCase()}'.`;
+                            feedbackEl.className = 'quiz-feedback incorrect';
+                        }
+                    } else {
+                        feedbackEl.textContent = "This riddle remains unsolved. Please select an answer.";
+                        feedbackEl.className = 'quiz-feedback incorrect'; // Use warning colors
+                        allAnswered = false;
+                    }
+                }
+                if (allAnswered) {
+                    quizScoreDisplay.textContent = `Your Alchemical Trial Score: ${score} out of ${totalQuestions}`;
+                } else {
+                    quizScoreDisplay.textContent = `Please answer all questions to reveal your full score.`;
+                }
+            });
+        }
+
+
+        // Current Year for Footer
+        const currentYearEl = document.getElementById('currentYear');
+        if (currentYearEl) {
+            currentYearEl.textContent = new Date().getFullYear();
+        }
+
+        // Initial call to set active link on page load
+        // And ensure accordion content padding is reset if JS is manipulating it directly
+        window.addEventListener('load', () => {
+            window.dispatchEvent(new Event('scroll'));
+            document.querySelectorAll('.accordion-content').forEach(content => {
+                if (!content.classList.contains('active')) {
+                    content.style.paddingTop = '0';
+                    content.style.paddingBottom = '0';
+                } else {
+                    // If active on load, ensure padding is set (though typically they start closed)
+                    content.style.paddingTop = '1.25rem'; 
+                    content.style.paddingBottom = '1.25rem';
+                }
+            });
+        });
+///for book
+  const pages = [
+    "Page1.png", "Page2.png", "Page3.png", "Page4.png", "Page5.png",
+    "Page6.png", "Page7.png", "Page8.png", "Page9.png", "Page10.png", 
+    "Page11.png", "Page12.png", "Page13.png", "Page14.png", "Page15.png",
+    "Page16.png",
+  ];
+
+  const img = document.getElementById("page");
+  const select = document.getElementById("pageSelect");
+  let currentPage = 0; // start on page1.png
+
+  function updatePage(index) {
+    if(index < 0) index = 0;
+    if(index >= pages.length) index = pages.length - 1;
+    currentPage = index;
+    img.src = pages[currentPage];
+    select.value = pages[currentPage]; // sync dropdown
+  }
+
+  // dropdown change
+  select.addEventListener("change", () => {
+    const index = pages.indexOf(select.value);
+    updatePage(index);
+  });
+
+  // previous button
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    updatePage(currentPage - 1);
+  });
+
+  // next button
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    updatePage(currentPage + 1);
+  });
+
+  ///navbar
+
+   // Smooth Scrolling & Active Nav Link
+        const nav = document.getElementById('main-nav');
+        const navLinks = document.querySelectorAll('#main-nav a');
+        const sections = document.querySelectorAll('section'); // For scroll spy
+        
+        function getNavHeight() {
+            if (nav && window.getComputedStyle(nav).position === 'sticky') {
+                return nav.offsetHeight;
+            }
+            return 0; // If nav is not sticky or not found
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const currentNavHeight = getNavHeight();
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - currentNavHeight;
+                    
+                    window.scrollTo({
+                         top: offsetPosition,
+                         behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // Update active nav link on scroll (Scroll Spy)
+        window.addEventListener('scroll', () => {
+            let currentSectionId = '';
+            const currentNavHeight = getNavHeight(); // Recalculate in case of resize or layout shift
+            const scrollPosition = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - currentNavHeight - 20; // 20px buffer for better accuracy
+                if (scrollPosition >= sectionTop) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+            
+            // If scrolled to the very top, or no section is "current" yet (e.g. very short page or at the bottom)
+            // Ensure 'welcome' is active if at the very top.
+            if (scrollPosition < (sections[0].offsetTop - currentNavHeight - 20)) {
+                 currentSectionId = 'welcome'; 
+            } else if (currentSectionId === '' && sections.length > 0) {
+                 // If somehow no section is matched but we've scrolled, default to first section or handle as needed.
+                 // For this case, if nothing is matched after iterating, it might mean we are below all sections
+                 // or the logic needs refinement for edge cases. Defaulting to 'welcome' if at top is good.
+            }
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+</script>
+
+
+</body>
+</html>
